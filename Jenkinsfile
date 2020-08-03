@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Cloning Git') {
             steps {
-                git '/opt/git/helloworld'
+                git 'https://github.com/bhaskar-cloud/helloworld.git'
             }
         }
         stage('Building Image') {
