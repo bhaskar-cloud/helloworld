@@ -1,7 +1,6 @@
 pipeline {
     environment {
         registry = "harbor-registry-mndc.uidai.gov.in/others"
-        registryCredential = ''
         dockerImage = ''
     }
     agent any
@@ -14,14 +13,14 @@ pipeline {
         stage('Building Image') {
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build("helloworld") registry + ":$BUILD_NUMBER"
                 }
             }
         }
         stage('Pushing Image to Registry') { 
             steps { 
                 script { 
-                    docker.withRegistry( '', registryCredential ) { 
+                    docker.withRegistry('harbor-registry-mndc.uidai.gov.in/others') { 
                         dockerImage.push() 
                     }
                 } 
